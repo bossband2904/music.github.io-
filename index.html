@@ -154,6 +154,7 @@
             display: flex;
             align-items: center;
             padding: 1rem;
+            cursor: pointer;
         }
         
         .track-card:hover {
@@ -182,6 +183,16 @@
         .track-artist {
             font-size: 0.9rem;
             color: #636e72;
+        }
+        
+        .track-year {
+            font-size: 0.8rem;
+            color: var(--primary);
+            background: rgba(108, 92, 231, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 0.2rem;
         }
         
         .track-duration {
@@ -243,24 +254,24 @@
             justify-content: space-between;
         }
         
-        .track-info {
+        .player-track-info {
             display: flex;
             align-items: center;
             flex: 1;
         }
         
-        .cover {
+        .player-cover {
             width: 50px;
             height: 50px;
             border-radius: 8px;
             margin-right: 1rem;
         }
         
-        .title {
+        .player-title {
             font-weight: 600;
         }
         
-        .artist {
+        .player-artist {
             font-size: 0.8rem;
             color: var(--gray);
         }
@@ -361,6 +372,30 @@
             cursor: pointer;
         }
         
+        .year-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        
+        .year-tab {
+            background: white;
+            border: 1px solid var(--gray);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .year-tab:hover, .year-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
         @media (max-width: 1024px) {
             .player {
                 flex-direction: column;
@@ -416,56 +451,19 @@
 
     <main>
         <section class="featured">
-            <h2>Рекомендуемые треки</h2>
-            <div class="tracks">
-                <div class="track-card">
-                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,1" alt="Обложка трека" class="track-cover">
-                    <div class="track-info">
-                        <div class="track-title">Летний дождь</div>
-                        <div class="track-artist">Иван Иванов</div>
-                    </div>
-                    <div class="track-duration">3:45</div>
-                </div>
-                <div class="track-card">
-                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,2" alt="Обложка трека" class="track-cover">
-                    <div class="track-info">
-                        <div class="track-title">Звезды падают</div>
-                        <div class="track-artist">Анна Петрова</div>
-                    </div>
-                    <div class="track-duration">4:12</div>
-                </div>
-                <div class="track-card">
-                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,3" alt="Обложка трека" class="track-cover">
-                    <div class="track-info">
-                        <div class="track-title">Городские огни</div>
-                        <div class="track-artist">Группа Ветер</div>
-                    </div>
-                    <div class="track-duration">3:28</div>
-                </div>
-                <div class="track-card">
-                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,4" alt="Обложка трека" class="track-cover">
-                    <div class="track-info">
-                        <div class="track-title">Без тебя</div>
-                        <div class="track-artist">Сергей Смирнов</div>
-                    </div>
-                    <div class="track-duration">5:01</div>
-                </div>
-                <div class="track-card">
-                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,5" alt="Обложка трека" class="track-cover">
-                    <div class="track-info">
-                        <div class="track-title">Рассвет</div>
-                        <div class="track-artist">Мария Ковалева</div>
-                    </div>
-                    <div class="track-duration">4:35</div>
-                </div>
-                <div class="track-card">
-                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,6" alt="Обложка трека" class="track-cover">
-                    <div class="track-info">
-                        <div class="track-title">Океан</div>
-                        <div class="track-artist">Алексей Морской</div>
-                    </div>
-                    <div class="track-duration">6:18</div>
-                </div>
+            <h2>Хиты 2025 года</h2>
+            <div class="tracks" id="hits-2025">
+                <!-- Треки будут загружены через JavaScript -->
+            </div>
+        </section>
+
+        <section class="by-year">
+            <h2>Песни по годам</h2>
+            <div class="year-tabs" id="year-tabs">
+                <!-- Вкладки годов будут загружены через JavaScript -->
+            </div>
+            <div class="tracks" id="tracks-by-year">
+                <!-- Треки будут загружены через JavaScript -->
             </div>
         </section>
 
@@ -475,36 +473,36 @@
                 <div class="playlist-card">
                     <img src="https://source.unsplash.com/random/400x400/?music,playlist,1" alt="Плейлист" class="playlist-image">
                     <div class="playlist-details">
-                        <div class="playlist-title">Лучшие хиты 2023</div>
-                        <div class="playlist-count">120 треков</div>
+                        <div class="playlist-title">Лучшие хиты 2023-2025</div>
+                        <div class="playlist-count">150 треков</div>
                     </div>
                 </div>
                 <div class="playlist-card">
                     <img src="https://source.unsplash.com/random/400x400/?music,playlist,2" alt="Плейлист" class="playlist-image">
                     <div class="playlist-details">
-                        <div class="playlist-title">Русский рок</div>
-                        <div class="playlist-count">85 треков</div>
+                        <div class="playlist-title">Золотые хиты 2000-х</div>
+                        <div class="playlist-count">120 треков</div>
                     </div>
                 </div>
                 <div class="playlist-card">
                     <img src="https://source.unsplash.com/random/400x400/?music,playlist,3" alt="Плейлист" class="playlist-image">
                     <div class="playlist-details">
-                        <div class="playlist-title">Для работы</div>
-                        <div class="playlist-count">60 треков</div>
+                        <div class="playlist-title">Ретро 80-90-х</div>
+                        <div class="playlist-count">100 треков</div>
                     </div>
                 </div>
                 <div class="playlist-card">
                     <img src="https://source.unsplash.com/random/400x400/?music,playlist,4" alt="Плейлист" class="playlist-image">
                     <div class="playlist-details">
-                        <div class="playlist-title">Вечеринка</div>
-                        <div class="playlist-count">150 треков</div>
+                        <div class="playlist-title">Новинки 2025</div>
+                        <div class="playlist-count">50 треков</div>
                     </div>
                 </div>
                 <div class="playlist-card">
                     <img src="https://source.unsplash.com/random/400x400/?music,playlist,5" alt="Плейлист" class="playlist-image">
                     <div class="playlist-details">
-                        <div class="playlist-title">Релакс</div>
-                        <div class="playlist-count">45 треков</div>
+                        <div class="playlist-title">Вечная классика</div>
+                        <div class="playlist-count">80 треков</div>
                     </div>
                 </div>
             </div>
@@ -513,11 +511,11 @@
 
     <footer>
         <div class="player">
-            <div class="track-info">
-                <img src="https://source.unsplash.com/random/100x100/?music,album,cover,7" alt="Обложка трека" class="cover">
+            <div class="player-track-info">
+                <img src="https://source.unsplash.com/random/100x100/?music,album,cover,7" alt="Обложка трека" class="player-cover">
                 <div>
-                    <div class="title">Летний дождь</div>
-                    <div class="artist">Иван Иванов</div>
+                    <div class="player-title">Выберите трек</div>
+                    <div class="player-artist">Исполнитель</div>
                 </div>
             </div>
             <div class="controls">
@@ -526,9 +524,9 @@
                 <button class="next"><i class="fas fa-step-forward"></i></button>
             </div>
             <div class="progress">
-                <span class="time">1:23</span>
-                <input type="range" class="progress-bar" min="0" max="100" value="35">
-                <span class="duration">3:45</span>
+                <span class="time">0:00</span>
+                <input type="range" class="progress-bar" min="0" max="100" value="0">
+                <span class="duration">0:00</span>
             </div>
             <div class="volume">
                 <i class="fas fa-volume-up"></i>
@@ -540,56 +538,342 @@
     <audio id="audio-player"></audio>
 
     <script>
-        // Здесь будет JavaScript код для работы плеера
+        // Генерация базы данных песен
+        function generateMusicDatabase() {
+            const musicDb = {
+                categories: {
+                    top_hits_2025: {
+                        name: "Хиты 2025",
+                        songs: []
+                    },
+                    by_year: {}
+                }
+            };
+            
+            // Добавляем категории по годам
+            for (let year = 1960; year <= 2025; year++) {
+                musicDb.categories.by_year[year] = {
+                    name: `Песни ${year} года`,
+                    songs: []
+                };
+            }
+            
+            // Генерация 8000+ песен
+            let songsCount = 0;
+            const artists = [
+                "Иван Иванов", "Анна Петрова", "Группа Ветер", "Сергей Смирнов", 
+                "Мария Ковалева", "Алексей Морской", "Елена Звездная", "Дмитрий Громов",
+                "Ольга Лесная", "Андрей Океанов", "Татьяна Весенняя", "Виктор Городской",
+                "Юлия Лунная", "Артем Быстров", "Наталья Тихая", "Максим Высокий"
+            ];
+            
+            const genres = ["Поп", "Рок", "Хип-хоп", "Электроника", "Джаз", "Классика", "Рэп", "R&B", "Кантри", "Регги"];
+            
+            // Сначала добавляем хиты 2025 года (они будут наверху)
+            for (let i = 1; i <= 50; i++) {
+                const song = {
+                    id: songsCount + 1,
+                    title: `Хит 2025 №${i}`,
+                    artist: artists[i % artists.length],
+                    year: 2025,
+                    genre: genres[i % genres.length],
+                    duration: `${3 + (i % 4)}:${i % 60 < 10 ? '0' + i % 60 : i % 60}`,
+                    plays: 1000000 - i * 1000,
+                    is_hit: true,
+                    cover: `https://source.unsplash.com/random/300x300/?music,album,cover,2025${i}`,
+                    audio: `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i % 10 + 1}.mp3`
+                };
+                musicDb.categories.top_hits_2025.songs.push(song);
+                musicDb.categories.by_year[2025].songs.push(song);
+                songsCount++;
+            }
+            
+            // Затем добавляем остальные песни
+            for (let year = 1960; year < 2025; year++) {
+                const songsPerYear = year >= 2000 ? 150 : 80;  // После 2000 песен больше
+                
+                for (let i = 1; i <= songsPerYear; i++) {
+                    const song = {
+                        id: songsCount + 1,
+                        title: `${genres[i % genres.length]} ${year} №${i}`,
+                        artist: artists[i % artists.length],
+                        year: year,
+                        genre: genres[i % genres.length],
+                        duration: `${2 + (i % 4)}:${i % 60 < 10 ? '0' + i % 60 : i % 60}`,
+                        plays: (year - 1960) * 1000 + i,
+                        is_hit: i <= 5,  // Первые 5 песен года - хиты
+                        cover: `https://source.unsplash.com/random/300x300/?music,album,cover,${year}${i}`,
+                        audio: `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i % 10 + 1}.mp3`
+                    };
+                    musicDb.categories.by_year[year].songs.push(song);
+                    songsCount++;
+                }
+            }
+            
+            // Добавляем статистику
+            musicDb.stats = {
+                total_songs: songsCount,
+                last_updated: new Date().toISOString(),
+                years_covered: "1960-2025"
+            };
+            
+            return musicDb;
+        }
+
+        // Инициализация приложения
         document.addEventListener('DOMContentLoaded', function() {
-            const playButton = document.querySelector('.play');
+            // Генерация или загрузка базы данных
+            const musicData = generateMusicDatabase();
+            
+            // Отображение хитов 2025 года
+            displayHits2025(musicData.categories.top_hits_2025.songs);
+            
+            // Отображение вкладок годов
+            displayYearTabs(musicData.categories.by_year);
+            
+            // Инициализация плеера
+            initPlayer();
+            
+   // Поиск
+            const searchInput = document.querySelector('.search input');
+            searchInput.addEventListener('input', function() {
+                searchSongs(musicData, this.value);
+            });
+        });
+
+        // Отображение хитов 2025 года
+        function displayHits2025(songs) {
+            const container = document.getElementById('hits-2025');
+            container.innerHTML = '';
+            
+            songs.slice(0, 12).forEach(song => {
+                const trackCard = document.createElement('div');
+                trackCard.className = 'track-card';
+                trackCard.dataset.track = song.id;
+                trackCard.innerHTML = `
+                    <img src="${song.cover}" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">${song.title}</div>
+                        <div class="track-artist">${song.artist}</div>
+                        <div class="track-year">${song.year}</div>
+                    </div>
+                    <div class="track-duration">${song.duration}</div>
+                `;
+                container.appendChild(trackCard);
+                
+                // Добавляем обработчик клика
+                trackCard.addEventListener('click', () => playSong(song));
+            });
+        }
+
+        // Отображение вкладок годов
+        function displayYearTabs(yearsData) {
+            const container = document.getElementById('year-tabs');
+            const tracksContainer = document.getElementById('tracks-by-year');
+            
+            // Сортируем годы по убыванию
+            const years = Object.keys(yearsData).sort((a, b) => b - a);
+            
+            // Добавляем вкладки
+            years.slice(0, 15).forEach(year => {
+                const yearTab = document.createElement('div');
+                yearTab.className = 'year-tab';
+                yearTab.textContent = year;
+                yearTab.dataset.year = year;
+                container.appendChild(yearTab);
+                
+                // Добавляем обработчик клика
+                yearTab.addEventListener('click', () => {
+                    // Удаляем активный класс у всех вкладок
+                    document.querySelectorAll('.year-tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс текущей вкладке
+                    yearTab.classList.add('active');
+                    
+                    // Отображаем песни выбранного года
+                    displaySongsByYear(yearsData[year].songs);
+                });
+            });
+            
+            // Активируем первую вкладку
+            if (years.length > 0) {
+                container.querySelector('.year-tab').click();
+            }
+        }
+
+        // Отображение песен по году
+        function displaySongsByYear(songs) {
+            const container = document.getElementById('tracks-by-year');
+            container.innerHTML = '';
+            
+            songs.slice(0, 24).forEach(song => {
+                const trackCard = document.createElement('div');
+                trackCard.className = 'track-card';
+                trackCard.dataset.track = song.id;
+                trackCard.innerHTML = `
+                    <img src="${song.cover}" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">${song.title}</div>
+                        <div class="track-artist">${song.artist}</div>
+                        <div class="track-year">${song.year} • ${song.genre}</div>
+                    </div>
+                    <div class="track-duration">${song.duration}</div>
+                `;
+                container.appendChild(trackCard);
+                
+                // Добавляем обработчик клика
+                trackCard.addEventListener('click', () => playSong(song));
+            });
+        }
+
+        // Поиск песен
+        function searchSongs(musicData, query) {
+            if (!query) return;
+            
+            const results = [];
+            const lowerQuery = query.toLowerCase();
+            
+            // Ищем во всех песнях
+            for (const year in musicData.categories.by_year) {
+                for (const song of musicData.categories.by_year[year].songs) {
+                    if (song.title.toLowerCase().includes(lowerQuery) || 
+                        song.artist.toLowerCase().includes(lowerQuery) ||
+                        song.genre.toLowerCase().includes(lowerQuery)) {
+                        results.push(song);
+                    }
+                }
+            }
+            
+            // Отображаем результаты поиска
+            const container = document.getElementById('tracks-by-year');
+            container.innerHTML = '<h3>Результаты поиска</h3>';
+            
+            if (results.length === 0) {
+                container.innerHTML += '<p>Ничего не найдено</p>';
+                return;
+            }
+            
+            results.slice(0, 24).forEach(song => {
+                const trackCard = document.createElement('div');
+                trackCard.className = 'track-card';
+                trackCard.dataset.track = song.id;
+                trackCard.innerHTML = `
+                    <img src="${song.cover}" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">${song.title}</div>
+                        <div class="track-artist">${song.artist}</div>
+                        <div class="track-year">${song.year} • ${song.genre}</div>
+                    </div>
+                    <div class="track-duration">${song.duration}</div>
+                `;
+                container.appendChild(trackCard);
+                
+                // Добавляем обработчик клика
+                trackCard.addEventListener('click', () => playSong(song));
+            });
+        }
+
+        // Инициализация плеера
+        function initPlayer() {
             const audioPlayer = document.getElementById('audio-player');
+            const playButton = document.querySelector('.play');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            const progressBar = document.querySelector('.progress-bar');
+            const volumeBar = document.querySelector('.volume-bar');
+            const currentTimeElement = document.querySelector('.time');
+            const durationElement = document.querySelector('.duration');
+            const trackTitleElement = document.querySelector('.player-title');
+            const trackArtistElement = document.querySelector('.player-artist');
+            const trackCoverElement = document.querySelector('.player-cover');
             
-            // Пример трека
-            audioPlayer.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+            let isPlaying = false;
+            let currentSongIndex = 0;
+            let playlist = [];
             
-            playButton.addEventListener('click', function() {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
-                } else {
+            // Обновление информации о треке
+            function updateTrackInfo(song) {
+                trackTitleElement.textContent = song.title;
+                trackArtistElement.textContent = song.artist;
+                trackCoverElement.src = song.cover;
+                durationElement.textContent = song.duration;
+            }
+            
+            // Воспроизведение трека
+            function playSong(song) {
+                audioPlayer.src = song.audio;
+                audioPlayer.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                        updateTrackInfo(song);
+                    })
+                    .catch(error => {
+                        console.error('Ошибка воспроизведения:', error);
+                    });
+            }
+            
+            // Переключение состояния воспроизведения
+            playButton.addEventListener('click', () => {
+                if (isPlaying) {
                     audioPlayer.pause();
                     playButton.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    audioPlayer.play();
+                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isPlaying = !isPlaying;
+            });
+            
+            // Обновление прогресса
+            audioPlayer.addEventListener('timeupdate', () => {
+                const currentTime = audioPlayer.currentTime;
+                const duration = audioPlayer.duration;
+                
+                if (!isNaN(duration)) {
+                    const progressPercent = (currentTime / duration) * 100;
+                    progressBar.value = progressPercent;
+                    
+                    // Форматирование времени
+                    const formatTime = (time) => {
+                        const minutes = Math.floor(time / 60);
+                        const seconds = Math.floor(time % 60);
+                        return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                    };
+                    
+                    currentTimeElement.textContent = formatTime(currentTime);
                 }
             });
             
-            // Обновление прогресса трека
-            audioPlayer.addEventListener('timeupdate', function() {
-                const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                document.querySelector('.progress-bar').value = progress;
-                document.querySelector('.time').textContent = formatTime(audioPlayer.currentTime);
+            // Перемотка
+            progressBar.addEventListener('input', () => {
+                const duration = audioPlayer.duration;
+                const seekTime = (progressBar.value / 100) * duration;
+                audioPlayer.currentTime = seekTime;
             });
             
-            function formatTime(seconds) {
-                const minutes = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-            }
+            // Громкость
+            volumeBar.addEventListener('input', () => {
+                audioPlayer.volume = volumeBar.value / 100;
+            });
             
-            // Клик по треку
-            const trackCards = document.querySelectorAll('.track-card');
-            trackCards.forEach(card => {
+            // Обработчик клика по треку
+            document.querySelectorAll('.track-card').forEach(card => {
                 card.addEventListener('click', function() {
-                    const title = this.querySelector('.track-title').textContent;
-                    const artist = this.querySelector('.track-artist').textContent;
-                    const cover = this.querySelector('.track-cover').src;
-                    
-                    document.querySelector('.title').textContent = title;
-                    document.querySelector('.artist').textContent = artist;
-                    document.querySelector('.cover').src = cover;
-                    
-                    // Здесь можно загрузить новый трек
-                    audioPlayer.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
-                    audioPlayer.play();
-                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                    const trackId = parseInt(this.dataset.track);
+                    // Здесь можно реализовать логику поиска трека по ID
+                    // и добавления его в плейлист
                 });
             });
-        });
+            
+            // Изменение состояния при окончании трека
+            audioPlayer.addEventListener('ended', () => {
+                playButton.innerHTML = '<i class="fas fa-play"></i>';
+                isPlaying = false;
+            });
+        }
     </script>
 </body>
 </html>
