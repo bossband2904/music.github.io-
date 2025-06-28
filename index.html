@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicWave - Погрузитесь в мир музыки</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary: #00cec9;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --gray: #dfe6e9;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, white, var(--gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .search {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 1rem;
+            width: 200px;
+            padding: 0.5rem;
+        }
+        
+        .search input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .tracks {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .track-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .track-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .track-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .track-info {
+            flex: 1;
+        }
+        
+        .track-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+        
+        .track-artist {
+            font-size: 0.9rem;
+            color: #636e72;
+        }
+        
+        .track-duration {
+            font-size: 0.9rem;
+            color: #636e72;
+        }
+        
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .playlist-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .playlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .playlist-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .playlist-details {
+            padding: 1rem;
+        }
+        
+        .playlist-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .playlist-count {
+            font-size: 0.8rem;
+            color: #636e72;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .player {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .track-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .cover {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+        
+        .title {
+            font-weight: 600;
+        }
+        
+        .artist {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .play {
+            background: var(--primary) !important;
+            font-size: 1.5rem !important;
+        }
+        
+        .play:hover {
+            background: var(--primary-dark) !important;
+        }
+        
+        .progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+        
+        .time, .duration {
+            font-size: 0.8rem;
+            color: var(--gray);
+            min-width: 40px;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .progress-bar::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+        
+        .volume {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .volume-bar {
+            width: 100px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .volume-bar::-webkit-slider-thumb {
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--secondary);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 1024px) {
+            .player {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .progress, .volume {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .search {
+                width: 100%;
+            }
+            
+            .search input {
+                width: 100%;
+            }
+            
+            .tracks {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MusicWave</div>
+        <nav>
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Жанры</a></li>
+                <li><a href="#">Альбомы</a></li>
+                <li><a href="#">Исполнители</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="Поиск музыки...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <section class="featured">
+            <h2>Рекомендуемые треки</h2>
+            <div class="tracks">
+                <div class="track-card">
+                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,1" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">Летний дождь</div>
+                        <div class="track-artist">Иван Иванов</div>
+                    </div>
+                    <div class="track-duration">3:45</div>
+                </div>
+                <div class="track-card">
+                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,2" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">Звезды падают</div>
+                        <div class="track-artist">Анна Петрова</div>
+                    </div>
+                    <div class="track-duration">4:12</div>
+                </div>
+                <div class="track-card">
+                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,3" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">Городские огни</div>
+                        <div class="track-artist">Группа Ветер</div>
+                    </div>
+                    <div class="track-duration">3:28</div>
+                </div>
+                <div class="track-card">
+                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,4" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">Без тебя</div>
+                        <div class="track-artist">Сергей Смирнов</div>
+                    </div>
+                    <div class="track-duration">5:01</div>
+                </div>
+                <div class="track-card">
+                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,5" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">Рассвет</div>
+                        <div class="track-artist">Мария Ковалева</div>
+                    </div>
+                    <div class="track-duration">4:35</div>
+                </div>
+                <div class="track-card">
+                    <img src="https://source.unsplash.com/random/300x300/?music,album,cover,6" alt="Обложка трека" class="track-cover">
+                    <div class="track-info">
+                        <div class="track-title">Океан</div>
+                        <div class="track-artist">Алексей Морской</div>
+                    </div>
+                    <div class="track-duration">6:18</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="playlists">
+            <h2>Популярные плейлисты</h2>
+            <div class="playlist-grid">
+                <div class="playlist-card">
+                    <img src="https://source.unsplash.com/random/400x400/?music,playlist,1" alt="Плейлист" class="playlist-image">
+                    <div class="playlist-details">
+                        <div class="playlist-title">Лучшие хиты 2023</div>
+                        <div class="playlist-count">120 треков</div>
+                    </div>
+                </div>
+                <div class="playlist-card">
+                    <img src="https://source.unsplash.com/random/400x400/?music,playlist,2" alt="Плейлист" class="playlist-image">
+                    <div class="playlist-details">
+                        <div class="playlist-title">Русский рок</div>
+                        <div class="playlist-count">85 треков</div>
+                    </div>
+                </div>
+                <div class="playlist-card">
+                    <img src="https://source.unsplash.com/random/400x400/?music,playlist,3" alt="Плейлист" class="playlist-image">
+                    <div class="playlist-details">
+                        <div class="playlist-title">Для работы</div>
+                        <div class="playlist-count">60 треков</div>
+                    </div>
+                </div>
+                <div class="playlist-card">
+                    <img src="https://source.unsplash.com/random/400x400/?music,playlist,4" alt="Плейлист" class="playlist-image">
+                    <div class="playlist-details">
+                        <div class="playlist-title">Вечеринка</div>
+                        <div class="playlist-count">150 треков</div>
+                    </div>
+                </div>
+                <div class="playlist-card">
+                    <img src="https://source.unsplash.com/random/400x400/?music,playlist,5" alt="Плейлист" class="playlist-image">
+                    <div class="playlist-details">
+                        <div class="playlist-title">Релакс</div>
+                        <div class="playlist-count">45 треков</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="player">
+            <div class="track-info">
+                <img src="https://source.unsplash.com/random/100x100/?music,album,cover,7" alt="Обложка трека" class="cover">
+                <div>
+                    <div class="title">Летний дождь</div>
+                    <div class="artist">Иван Иванов</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="prev"><i class="fas fa-step-backward"></i></button>
+                <button class="play"><i class="fas fa-play"></i></button>
+                <button class="next"><i class="fas fa-step-forward"></i></button>
+            </div>
+            <div class="progress">
+                <span class="time">1:23</span>
+                <input type="range" class="progress-bar" min="0" max="100" value="35">
+                <span class="duration">3:45</span>
+            </div>
+            <div class="volume">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" class="volume-bar" min="0" max="100" value="80">
+            </div>
+        </div>
+    </footer>
+
+    <audio id="audio-player"></audio>
+
+    <script>
+        // Здесь будет JavaScript код для работы плеера
+        document.addEventListener('DOMContentLoaded', function() {
+            const playButton = document.querySelector('.play');
+            const audioPlayer = document.getElementById('audio-player');
+            
+            // Пример трека
+            audioPlayer.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+            
+            playButton.addEventListener('click', function() {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audioPlayer.pause();
+                    playButton.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+            
+            // Обновление прогресса трека
+            audioPlayer.addEventListener('timeupdate', function() {
+                const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                document.querySelector('.progress-bar').value = progress;
+                document.querySelector('.time').textContent = formatTime(audioPlayer.currentTime);
+            });
+            
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            // Клик по треку
+            const trackCards = document.querySelectorAll('.track-card');
+            trackCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.track-title').textContent;
+                    const artist = this.querySelector('.track-artist').textContent;
+                    const cover = this.querySelector('.track-cover').src;
+                    
+                    document.querySelector('.title').textContent = title;
+                    document.querySelector('.artist').textContent = artist;
+                    document.querySelector('.cover').src = cover;
+                    
+                    // Здесь можно загрузить новый трек
+                    audioPlayer.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+                    audioPlayer.play();
+                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
